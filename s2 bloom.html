@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S2 Bloom &amp; Flowerista — Boutique Florist</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#21322A;
+    --ink-soft:#2C4038;
+    --ivory:#F6F1E7;
+    --paper:#FBF8F2;
+    --rose:#C1707A;
+    --rose-deep:#A85B67;
+    --gold:#B48A4E;
+    --sage:#96A98D;
+    --text-muted: rgba(33,50,42,0.62);
+    --line: rgba(33,50,42,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--rose); color:var(--ivory); }
+
+  h1,h2,h3,h4,.display-serif{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+    font-weight:600;
+  }
+
+  .eyebrow.on-dark{ color:#E3B98F; }
+
+  a{ color:inherit; }
+  .btn{ border-radius:2px; font-family:'Jost',sans-serif; letter-spacing:0.03em; font-weight:500; padding:0.75rem 1.9rem; transition:all .25s ease; }
+
+  .btn-bloom{
+    background:var(--ink);
+    color:var(--ivory);
+    border:1px solid var(--ink);
+  }
+  .btn-bloom:hover{ background:transparent; color:var(--ink); }
+
+  .btn-bloom-outline{
+    background:transparent;
+    color:var(--ivory);
+    border:1px solid rgba(246,241,231,0.55);
+  }
+  .btn-bloom-outline:hover{ background:var(--ivory); color:var(--ink); border-color:var(--ivory); }
+
+  .btn-rose{
+    background:var(--rose);
+    color:var(--ivory);
+    border:1px solid var(--rose);
+  }
+  .btn-rose:hover{ background:transparent; color:var(--rose-deep); border-color:var(--rose-deep); }
+
+  .btn-sm-line{
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:0.6rem 1.1rem;
+    border:1px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+  }
+  .btn-sm-line:hover{ background:var(--ink); color:var(--ivory); }
+
+  /* ===== NAV ===== */
+  .navbar{
+    background:rgba(246,241,231,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding-top:.9rem; padding-bottom:.9rem;
+    transition:padding .2s ease;
+  }
+  .brand-mark{ display:flex; align-items:center; gap:.6rem; }
+  .brand-mark svg{ width:34px; height:34px; flex-shrink:0; }
+  .brand-name{
+    font-family:'Fraunces',serif;
+    font-size:1.28rem;
+    letter-spacing:0.01em;
+    color:var(--ink);
+    line-height:1.05;
+  }
+  .brand-name small{
+    display:block;
+    font-family:'Jost',sans-serif;
+    font-size:0.6rem;
+    letter-spacing:0.28em;
+    color:var(--rose-deep);
+    font-weight:600;
+    margin-top:2px;
+  }
+  .navbar-nav .nav-link{
+    font-size:0.86rem;
+    letter-spacing:0.03em;
+    color:var(--ink) !important;
+    margin:0 0.85rem;
+    padding:0.3rem 0 !important;
+    position:relative;
+  }
+  .navbar-nav .nav-link::after{
+    content:"";
+    position:absolute; left:0; bottom:-2px;
+    width:0; height:1px; background:var(--rose-deep);
+    transition:width .25s ease;
+  }
+  .navbar-nav .nav-link:hover::after{ width:100%; }
+
+  /* ===== HERO ===== */
+  .hero{
+    background:radial-gradient(120% 140% at 78% 15%, #35493F 0%, var(--ink) 55%, #17231D 100%);
+    color:var(--ivory);
+    position:relative;
+    overflow:hidden;
+    padding-top:7.5rem;
+  }
+  .hero .botanical-hero{
+    position:absolute;
+    right:-6%; top:50%; transform:translateY(-50%);
+    width:52%; max-width:640px;
+    opacity:0.92;
+  }
+  .hero-eyebrow{ color:#E3B98F; }
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.6rem);
+    color:var(--ivory);
+    line-height:1.04;
+  }
+  .hero h1 em{ font-style:italic; color:#E7B7A6; font-weight:400; }
+  .hero p.lead-copy{
+    color:rgba(246,241,231,0.78);
+    font-size:1.08rem;
+    max-width:480px;
+  }
+  .hero-stats{ border-top:1px solid rgba(246,241,231,0.18); margin-top:3.2rem; padding-top:1.6rem; }
+  .hero-stats .stat-num{ font-family:'Fraunces',serif; font-size:1.5rem; color:var(--ivory); }
+  .hero-stats .stat-label{ font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(246,241,231,0.55); }
+
+  /* ===== MARQUEE RIBBON ===== */
+  .ribbon{
+    background:var(--rose);
+    color:var(--ivory);
+    overflow:hidden;
+    white-space:nowrap;
+    border-top:1px solid rgba(0,0,0,0.06);
+  }
+  .ribbon-track{
+    display:inline-flex;
+    animation: scroll-left 32s linear infinite;
+  }
+  .ribbon-track span{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1rem;
+    padding:0.85rem 2.4rem;
+    letter-spacing:0.02em;
+    white-space:nowrap;
+  }
+  .ribbon-track span::after{ content:"✳"; margin-left:2.4rem; opacity:0.6; font-style:normal; }
+  @keyframes scroll-left{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .ribbon-track{ animation:none; } }
+
+  /* ===== SECTION GENERIC ===== */
+  section{ padding:6.5rem 0; }
+  .section-head{ max-width:640px; }
+  .divider-sprig{ width:64px; height:auto; color:var(--rose-deep); margin-bottom:1.1rem; }
+
+  /* ===== PRODUCT CARDS ===== */
+  .stem-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    height:100%;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .stem-card:hover{ transform:translateY(-6px); box-shadow:0 22px 40px -20px rgba(33,50,42,0.35); }
+  .stem-art{
+    aspect-ratio:4/5;
+    background:linear-gradient(160deg,#EFE6D3 0%, #E7D9C4 100%);
+    position:relative;
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stem-art svg{ width:70%; height:70%; }
+  .stem-badge{
+    position:absolute; top:14px; left:14px;
+    background:var(--ink); color:var(--ivory);
+    font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase;
+    padding:0.35rem 0.65rem;
+  }
+  .stem-body{ padding:1.4rem 1.4rem 1.6rem; }
+  .stem-price{ font-family:'Fraunces',serif; font-size:1.2rem; color:var(--rose-deep); }
+  .stem-name{ font-size:1.02rem; margin:.15rem 0 .8rem; }
+  .stem-delivery{ font-size:0.72rem; letter-spacing:0.06em; color:var(--text-muted); text-transform:uppercase; display:flex; align-items:center; gap:.4rem; margin-top:.6rem;}
+
+  .pill-filter{
+    border:1px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:0.5rem 1.1rem;
+    border-radius:30px;
+  }
+  .pill-filter.active, .pill-filter:hover{ background:var(--ink); color:var(--ivory); }
+
+  /* ===== SPLIT BANDS ===== */
+  .band-dark{ background:var(--ink); color:var(--ivory); }
+  .band-dark .text-muted-on-dark{ color:rgba(246,241,231,0.68); }
+  .band-art{
+    aspect-ratio:1/1;
+    border:1px solid rgba(246,241,231,0.22);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .band-art svg{ width:60%; }
+  .band-sage{ background:var(--sage); color:var(--ink); }
+
+  /* ===== ABOUT ===== */
+  .about-figure{
+    background:var(--paper);
+    border:1px solid var(--line);
+    aspect-ratio:5/6;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-figure svg{ width:66%; }
+  .founder-line{ font-family:'Fraunces',serif; font-style:italic; font-size:1.25rem; color:var(--rose-deep); }
+
+  /* ===== CONTACT ===== */
+  .contact-wrap{ background:var(--paper); border:1px solid var(--line); }
+  .form-control{
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--line);
+    border-radius:0;
+    padding:0.7rem 0.2rem;
+    font-family:'Jost',sans-serif;
+  }
+  .form-control:focus{
+    box-shadow:none;
+    border-bottom-color:var(--rose-deep);
+    background:transparent;
+  }
+  .form-label{ font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); }
+  .map-plate{
+    background:
+      repeating-linear-gradient(0deg, rgba(33,50,42,0.06) 0 1px, transparent 1px 34px),
+      repeating-linear-gradient(90deg, rgba(33,50,42,0.06) 0 1px, transparent 1px 34px),
+      var(--ivory);
+    border:1px solid var(--line);
+    min-height:260px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .info-row{ display:flex; gap:1rem; padding:1.1rem 0; border-bottom:1px solid var(--line); }
+  .info-row:last-child{ border-bottom:none; }
+  .info-row .ico{ color:var(--rose-deep); flex-shrink:0; margin-top:.15rem; }
+
+  /* ===== FOOTER ===== */
+  footer{ background:var(--ink); color:rgba(246,241,231,0.7); padding:3.6rem 0 1.6rem; }
+  footer a{ text-decoration:none; }
+  footer a:hover{ color:var(--ivory); }
+  footer h6{ color:var(--ivory); font-family:'Jost',sans-serif; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:1.1rem; }
+  .footer-links li{ margin-bottom:.55rem; font-size:0.9rem; }
+  .social-ico{
+    width:34px; height:34px; border:1px solid rgba(246,241,231,0.28);
+    display:inline-flex; align-items:center; justify-content:center; margin-right:.5rem;
+    transition:all .2s ease;
+  }
+  .social-ico:hover{ background:var(--ivory); border-color:var(--ivory); color:var(--ink); }
+
+  .fade-up{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .fade-up.in{ opacity:1; transform:translateY(0); }
+
+  @media (max-width:991px){
+    .hero .botanical-hero{ position:static; transform:none; width:70%; margin:2.2rem auto 0; display:block; opacity:0.85; }
+    section{ padding:4.2rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand brand-mark" href="#top">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="29" stroke="#21322A" stroke-width="1"/>
+        <path d="M30 14C30 14 24 20 24 26C24 29.3 26.7 32 30 32C33.3 32 36 29.3 36 26C36 20 30 14 30 14Z" stroke="#C1707A" stroke-width="1.1" fill="none"/>
+        <path d="M30 32C30 32 20 32 16 38C14 41 15 44 18 44" stroke="#21322A" stroke-width="1" fill="none" stroke-linecap="round"/>
+        <path d="M30 32C30 32 40 32 44 38C46 41 45 44 42 44" stroke="#21322A" stroke-width="1" fill="none" stroke-linecap="round"/>
+        <circle cx="30" cy="26" r="2.4" fill="#B48A4E"/>
+      </svg>
+      <span class="brand-name">S2 Bloom<small>&amp; FLOWERISTA</small></span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="navbar-nav align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#collections">All Designs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#weddings">Weddings &amp; Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sympathy">Sympathy &amp; Funeral</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">Our Story</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-bloom btn-sm-line" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <svg class="botanical-hero" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#E3B98F" stroke-width="1.1" fill="none" opacity="0.9">
+      <path d="M200 460C200 460 190 340 210 260C225 200 260 170 280 120"/>
+      <path d="M210 260C210 260 160 240 140 200"/>
+      <path d="M215 220C215 220 260 210 285 180"/>
+      <path d="M200 320C200 320 150 310 125 340"/>
+      <path d="M205 380C205 380 250 375 270 405"/>
+      <ellipse cx="280" cy="115" rx="34" ry="46" transform="rotate(18 280 115)"/>
+      <ellipse cx="255" cy="130" rx="30" ry="40" transform="rotate(-10 255 130)"/>
+      <ellipse cx="300" cy="145" rx="26" ry="36" transform="rotate(46 300 145)"/>
+      <circle cx="280" cy="118" r="7" fill="#E3B98F" fill-opacity="0.5"/>
+      <ellipse cx="140" cy="195" rx="22" ry="30" transform="rotate(-24 140 195)"/>
+      <ellipse cx="120" cy="205" rx="18" ry="26" transform="rotate(30 120 205)"/>
+      <circle cx="132" cy="196" r="5" fill="#C1707A" fill-opacity="0.6"/>
+      <ellipse cx="125" cy="335" rx="20" ry="28" transform="rotate(-16 125 335)"/>
+      <ellipse cx="105" cy="345" rx="16" ry="22" transform="rotate(28 105 345)"/>
+      <circle cx="118" cy="333" r="4.5" fill="#96A98D" fill-opacity="0.7"/>
+      <ellipse cx="270" cy="402" rx="24" ry="32" transform="rotate(12 270 402)"/>
+      <circle cx="270" cy="400" r="5" fill="#E3B98F" fill-opacity="0.6"/>
+      <path d="M200 460C200 460 205 480 195 498"/>
+    </g>
+  </svg>
+
+  <div class="container position-relative">
+    <div class="row py-5">
+      <div class="col-lg-7 col-xl-6 py-5">
+        <p class="eyebrow hero-eyebrow mb-3">Portland-Grown &amp; Hand-Tied Since 2009</p>
+        <h1 class="mb-4">Fresh, local, <em>seasonal</em> — arranged the same day you order.</h1>
+        <p class="lead-copy mb-4">S2 Bloom &amp; Flowerista designs one-of-a-kind bouquets from small-farm stems, delivered by hand across the city. No wire-service filler, no plastic sleeves — just flowers cut this morning.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#contact" class="btn btn-rose">Shop the Collection</a>
+          <a href="#weddings" class="btn btn-bloom-outline">Plan a Wedding</a>
+        </div>
+
+        <div class="row hero-stats">
+          <div class="col-4">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Years Arranging</div>
+          </div>
+          <div class="col-4">
+            <div class="stat-num">40</div>
+            <div class="stat-label">Local Farm Partners</div>
+          </div>
+          <div class="col-4">
+            <div class="stat-num">Same-Day</div>
+            <div class="stat-label">City Delivery</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ RIBBON MARQUEE ============ -->
+<div class="ribbon">
+  <div class="ribbon-track">
+    <span>Same-Day Delivery</span><span>Locally Grown</span><span>Hand-Tied Bouquets</span><span>Farm Direct</span>
+    <span>Same-Day Delivery</span><span>Locally Grown</span><span>Hand-Tied Bouquets</span><span>Farm Direct</span>
+  </div>
+</div>
+
+<!-- ============ COLLECTIONS ============ -->
+<section id="collections">
+  <div class="container">
+    <div class="row align-items-end mb-5 fade-up">
+      <div class="col-lg-7 section-head">
+        <svg class="divider-sprig" viewBox="0 0 80 24" fill="none"><path d="M2 12H30M78 12H50M40 12C40 12 34 6 34 2M40 12C40 12 46 6 46 2M40 12C40 12 36 18 30 18M40 12C40 12 44 18 50 18" stroke="currentColor" stroke-width="1"/></svg>
+        <p class="eyebrow mb-2">All Designs</p>
+        <h2 class="display-serif" style="font-size:clamp(1.9rem,3vw,2.6rem);">Signature Collections</h2>
+      </div>
+      <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+        <p class="text-muted mb-0" style="max-width:340px; margin-left:auto;">Four house arrangements, restocked weekly with whatever's blooming best.</p>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2 mb-5 fade-up">
+      <button class="pill-filter active">All</button>
+      <button class="pill-filter">Dahlias</button>
+      <button class="pill-filter">Garden Roses</button>
+      <button class="pill-filter">Wildflower</button>
+      <button class="pill-filter">Gift Sets</button>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Card 1 -->
+      <div class="col-sm-6 col-lg-3 fade-up">
+        <div class="stem-card">
+          <div class="stem-art">
+            <span class="stem-badge">Gift Set</span>
+            <svg viewBox="0 0 140 160" fill="none">
+              <g stroke="#8A5A45" stroke-width="1.1">
+                <rect x="18" y="118" width="30" height="34" rx="2" fill="#EFE0C8" stroke="#B48A4E"/>
+                <path d="M33 118V80" stroke="#3A2A20"/>
+                <ellipse cx="33" cy="70" rx="18" ry="24" fill="#D9C79A" fill-opacity="0.6" stroke="#B48A4E"/>
+              </g>
+              <g stroke="#7A4B52" stroke-width="1">
+                <path d="M75 152V60"/>
+                <ellipse cx="75" cy="46" rx="24" ry="30" fill="#E4B7BC" fill-opacity="0.55"/>
+                <path d="M95 152V90"/>
+                <ellipse cx="98" cy="78" rx="16" ry="22" fill="#C1707A" fill-opacity="0.5"/>
+              </g>
+            </svg>
+          </div>
+          <div class="stem-body">
+            <div class="stem-price">$235.00</div>
+            <h3 class="stem-name display-serif">The Grande Dame</h3>
+            <p class="text-muted small mb-3">Garden roses &amp; ranunculus, paired with a bottle of dry sparkling and a hand-poured candle.</p>
+            <a href="#contact" class="btn btn-sm-line w-100">Shop Now</a>
+            <div class="stem-delivery">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="7" width="14" height="9"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+              Same-day delivery
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-sm-6 col-lg-3 fade-up">
+        <div class="stem-card">
+          <div class="stem-art">
+            <svg viewBox="0 0 140 160" fill="none">
+              <g stroke="#5C2E3A" stroke-width="1.1">
+                <path d="M40 150V70"/>
+                <circle cx="40" cy="58" r="16" fill="#7A2E3F" fill-opacity="0.55"/>
+                <path d="M70 150V50"/>
+                <circle cx="70" cy="40" r="20" fill="#5C2E3A" fill-opacity="0.5"/>
+                <path d="M100 150V80"/>
+                <circle cx="100" cy="66" r="14" fill="#8A5C8F" fill-opacity="0.5"/>
+              </g>
+              <g stroke="#96A98D" stroke-width="1">
+                <path d="M55 150C55 150 45 120 30 112"/>
+                <path d="M85 150C85 150 95 118 112 108"/>
+              </g>
+            </svg>
+          </div>
+          <div class="stem-body">
+            <div class="stem-price">$115.00</div>
+            <h3 class="stem-name display-serif">The Summer Berry</h3>
+            <p class="text-muted small mb-3">Deep plum dahlias, blush snapdragons and scabiosa, gathered loose and low.</p>
+            <a href="#contact" class="btn btn-sm-line w-100">Shop Now</a>
+            <div class="stem-delivery">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="7" width="14" height="9"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+              Same-day delivery
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-sm-6 col-lg-3 fade-up">
+        <div class="stem-card">
+          <div class="stem-art">
+            <svg viewBox="0 0 140 160" fill="none">
+              <g stroke="#8A5A45" stroke-width="1.1">
+                <path d="M45 150V85"/>
+                <circle cx="45" cy="72" r="15" fill="#D98E63" fill-opacity="0.55"/>
+                <path d="M75 150V60"/>
+                <circle cx="75" cy="46" r="19" fill="#C1707A" fill-opacity="0.55"/>
+                <path d="M100 150V90"/>
+                <circle cx="100" cy="78" r="13" fill="#A85B67" fill-opacity="0.55"/>
+              </g>
+            </svg>
+          </div>
+          <div class="stem-body">
+            <div class="stem-price">$95.00</div>
+            <h3 class="stem-name display-serif">The Summer Dahlias</h3>
+            <p class="text-muted small mb-3">Café-au-lait and terracotta dahlias, straight from our Sellwood-side growers.</p>
+            <a href="#contact" class="btn btn-sm-line w-100">Shop Now</a>
+            <div class="stem-delivery">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="7" width="14" height="9"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+              Same-day delivery
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-sm-6 col-lg-3 fade-up">
+        <div class="stem-card">
+          <div class="stem-art">
+            <span class="stem-badge">Deluxe</span>
+            <svg viewBox="0 0 140 160" fill="none">
+              <g stroke="#5C6B54" stroke-width="1.1">
+                <path d="M35 150C35 150 40 100 30 70"/>
+                <path d="M70 150C70 150 68 90 78 50"/>
+                <path d="M100 150C100 150 96 110 108 82"/>
+                <circle cx="30" cy="66" r="9" fill="#E7B7A6" fill-opacity="0.6"/>
+                <circle cx="78" cy="44" r="11" fill="#E3B98F" fill-opacity="0.6"/>
+                <circle cx="109" cy="76" r="8" fill="#8A5C8F" fill-opacity="0.5"/>
+                <path d="M50 130C50 130 40 118 44 108"/>
+                <path d="M90 130C90 130 100 120 96 108"/>
+              </g>
+            </svg>
+          </div>
+          <div class="stem-body">
+            <div class="stem-price">$115.00</div>
+            <h3 class="stem-name display-serif">The Summer Garden</h3>
+            <p class="text-muted small mb-3">A wild, just-picked mix of sweet pea, delphinium and garden roses.</p>
+            <a href="#contact" class="btn btn-sm-line w-100">Shop Now</a>
+            <div class="stem-delivery">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="7" width="14" height="9"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+              Same-day delivery
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ WEDDINGS & EVENTS ============ -->
+<section id="weddings" class="band-dark">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 order-lg-2 fade-up">
+        <p class="eyebrow on-dark mb-2">Weddings &amp; Events</p>
+        <h2 class="display-serif text-white mb-4" style="font-size:clamp(1.9rem,3vw,2.6rem);">Flowers that hold up to a whole day of dancing.</h2>
+        <p class="text-muted-on-dark mb-4" style="max-width:460px;">From a courthouse bouquet to a hundred-guest installation, our design team works from your venue, palette and budget to build something that feels entirely yours. We handle delivery, setup and teardown so you don't have to think about it twice.</p>
+        <ul class="list-unstyled text-muted-on-dark mb-4" style="max-width:420px;">
+          <li class="mb-2">— Complimentary design consultation</li>
+          <li class="mb-2">— Bridal party &amp; ceremony florals</li>
+          <li class="mb-2">— Reception centerpieces &amp; installations</li>
+          <li class="mb-2">— On-site setup and next-day pickup</li>
+        </ul>
+        <a href="#contact" class="btn btn-rose">Enquire About Your Date</a>
+      </div>
+      <div class="col-lg-6 order-lg-1 fade-up">
+        <div class="band-art">
+          <svg viewBox="0 0 220 220" fill="none">
+            <g stroke="#E3B98F" stroke-width="1">
+              <circle cx="110" cy="110" r="70" opacity="0.25"/>
+              <path d="M110 190C110 190 100 140 110 110C118 86 140 70 150 40"/>
+              <path d="M110 110C110 110 80 100 66 76"/>
+              <path d="M112 82C112 82 140 78 156 56"/>
+              <ellipse cx="150" cy="36" rx="16" ry="22" transform="rotate(20 150 36)"/>
+              <ellipse cx="66" cy="72" rx="14" ry="20" transform="rotate(-24 66 72)"/>
+              <ellipse cx="158" cy="52" rx="12" ry="17" transform="rotate(40 158 52)"/>
+              <circle cx="110" cy="150" r="1.6" fill="#E3B98F"/>
+              <circle cx="105" cy="130" r="1.6" fill="#E3B98F"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYMPATHY & FUNERAL ============ -->
+<section id="sympathy" class="band-sage">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 fade-up">
+        <div class="band-art" style="border-color:rgba(33,50,42,0.2);">
+          <svg viewBox="0 0 220 220" fill="none">
+            <g stroke="#21322A" stroke-width="1" opacity="0.75">
+              <path d="M60 190C60 190 60 130 90 100C120 70 130 50 130 30"/>
+              <ellipse cx="130" cy="26" rx="18" ry="24" transform="rotate(10 130 26)"/>
+              <path d="M90 100C90 100 60 92 46 68"/>
+              <ellipse cx="44" cy="64" rx="12" ry="17" transform="rotate(-30 44 64)"/>
+              <path d="M100 130C100 130 130 122 146 100"/>
+              <ellipse cx="150" cy="96" rx="12" ry="17" transform="rotate(30 150 96)"/>
+              <path d="M75 160C75 160 100 155 112 140"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="col-lg-6 fade-up">
+        <p class="eyebrow mb-2">Sympathy &amp; Funeral</p>
+        <h2 class="display-serif mb-4" style="font-size:clamp(1.9rem,3vw,2.6rem);">Quiet, thoughtful arrangements for difficult days.</h2>
+        <p class="mb-4" style="max-width:460px; color:rgba(33,50,42,0.75);">We keep a standing order of soft, seasonal stems set aside for sympathy work, so we can turn around a service-ready arrangement, standing spray or hand-tied tribute with short notice — always delivered directly to the home or venue.</p>
+        <a href="#contact" class="btn btn-bloom">Speak With Our Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / STORY ============ -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 fade-up">
+        <div class="about-figure">
+          <svg viewBox="0 0 200 220" fill="none">
+            <g stroke="#21322A" stroke-width="1">
+              <path d="M100 200C100 200 92 150 100 120C106 98 124 84 130 60"/>
+              <path d="M100 120C100 120 76 112 64 90"/>
+              <path d="M102 96C102 96 122 92 134 72"/>
+              <ellipse cx="130" cy="56" rx="15" ry="20" transform="rotate(18 130 56)" fill="#C1707A" fill-opacity="0.35"/>
+              <ellipse cx="64" cy="86" rx="12" ry="17" transform="rotate(-22 64 86)" fill="#96A98D" fill-opacity="0.4"/>
+              <ellipse cx="136" cy="68" rx="10" ry="14" transform="rotate(40 136 68)" fill="#E3B98F" fill-opacity="0.5"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="col-lg-7 fade-up">
+        <p class="eyebrow mb-2">Nice To Meet You</p>
+        <h2 class="display-serif mb-4" style="font-size:clamp(1.9rem,3vw,2.6rem);">Two sisters, one flower cart, fifteen years later.</h2>
+        <p class="founder-line mb-3">"We never wanted to be the biggest shop in town — just the one that smells like an actual garden."</p>
+        <p class="text-muted mb-4" style="max-width:560px;">S2 Bloom &amp; Flowerista started as a Saturday market stand in 2009 and grew into a full studio without ever giving up the habit of buying direct from growers within a hundred miles. Every stem that comes through our door is inspected, conditioned and arranged by hand the same day — nothing sits in a cooler waiting for an order.</p>
+        <div class="row g-4">
+          <div class="col-6 col-md-4">
+            <div class="stat-num display-serif" style="color:var(--rose-deep); font-size:1.6rem;">100%</div>
+            <div class="text-muted small">Locally sourced stems</div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="stat-num display-serif" style="color:var(--rose-deep); font-size:1.6rem;">6</div>
+            <div class="text-muted small">Full-time designers</div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="stat-num display-serif" style="color:var(--rose-deep); font-size:1.6rem;">0</div>
+            <div class="text-muted small">Plastic-wrapped bouquets</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="band-dark">
+  <div class="container">
+    <div class="row mb-5 fade-up">
+      <div class="col-lg-7 section-head">
+        <p class="eyebrow on-dark mb-2">Visit Or Reach Out</p>
+        <h2 class="display-serif text-white" style="font-size:clamp(1.9rem,3vw,2.6rem);">Every bouquet above starts with a message here.</h2>
+      </div>
+    </div>
+
+    <div class="contact-wrap p-4 p-md-5">
+      <div class="row g-5">
+        <div class="col-lg-7 fade-up">
+          <p class="eyebrow mb-3">Send An Enquiry</p>
+          <form onsubmit="return false;">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" placeholder="Jane Appleseed">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="jane@email.com">
+              </div>
+              <div class="col-12">
+                <label class="form-label">What are you celebrating?</label>
+                <select class="form-select form-control">
+                  <option>An everyday arrangement</option>
+                  <option>A wedding or event</option>
+                  <option>A sympathy tribute</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" rows="4" placeholder="Tell us the occasion, date and a rough budget..."></textarea>
+              </div>
+              <div class="col-12 pt-2">
+                <button type="submit" class="btn btn-rose">Send Enquiry</button>
+                <span class="text-muted small ms-3">This is a demo form — no data is sent.</span>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-lg-5 fade-up">
+          <p class="eyebrow mb-3">Studio Details</p>
+          <div class="info-row">
+            <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div>
+              <div>1428 SE Umatilla St</div>
+              <div class="text-muted small">Portland, OR 97202</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z"/></svg></span>
+            <div>
+              <div>(503) 555-0148</div>
+              <div class="text-muted small">Mon–Sat, 9am–6pm</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
+            <div>
+              <div>hello@s2bloomflowerista.com</div>
+              <div class="text-muted small">We reply within one business day</div>
+            </div>
+          </div>
+          <div class="map-plate mt-3">
+            <div class="text-center">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C1707A" stroke-width="1.6" class="mb-2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div class="text-muted small">Studio &amp; pickup counter — map on request</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="brand-mark mb-3">
+          <svg viewBox="0 0 60 60" fill="none" width="30" height="30">
+            <circle cx="30" cy="30" r="29" stroke="#F6F1E7" stroke-width="1"/>
+            <path d="M30 14C30 14 24 20 24 26C24 29.3 26.7 32 30 32C33.3 32 36 29.3 36 26C36 20 30 14 30 14Z" stroke="#E3B98F" stroke-width="1.1" fill="none"/>
+            <circle cx="30" cy="26" r="2.4" fill="#C1707A"/>
+          </svg>
+          <span class="brand-name" style="color:#F6F1E7;">S2 Bloom<small style="color:#E3B98F;">&amp; FLOWERISTA</small></span>
+        </div>
+        <p class="small" style="max-width:280px; color:rgba(246,241,231,0.6);">Boutique floral design and same-day delivery, grown and arranged within a hundred miles of our studio.</p>
+        <div class="mt-3">
+          <a href="#" class="social-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg></a>
+          <a href="#" class="social-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.2.37.6.23 1 .5 1.4.9.4.4.67.83.9 1.4.16.4.33 1.1.37 2.2.06 1.2.06 1.5.06 4.1s0 2.9-.06 4.1c-.05 1.1-.22 1.8-.37 2.2-.23.6-.5 1-.9 1.4-.4.4-.83.67-1.4.9-.4.16-1.1.33-2.2.37-1.2.06-1.5.06-4.1.06s-2.9 0-4.1-.06c-1.1-.05-1.8-.22-2.2-.37a3.7 3.7 0 0 1-1.4-.9 3.7 3.7 0 0 1-.9-1.4c-.16-.4-.33-1.1-.37-2.2-.06-1.2-.06-1.5-.06-4.1s0-2.9.06-4.1c.05-1.1.22-1.8.37-2.2.23-.6.5-1 .9-1.4.4-.4.83-.67 1.4-.9.4-.16 1.1-.33 2.2-.37C9.1 2.2 9.4 2.2 12 2.2Zm0 3.4a6.4 6.4 0 1 0 0 12.8 6.4 6.4 0 0 0 0-12.8Zm0 10.6a4.2 4.2 0 1 1 0-8.4 4.2 4.2 0 0 1 0 8.4Zm6.6-10.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg></a>
+          <a href="#" class="social-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3ZM8.5 17.5h-2v-7h2v7Zm-1-8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Zm9.5 8h-2v-3.7c0-1-.4-1.6-1.2-1.6-.7 0-1.1.5-1.3 1-.1.2-.1.5-.1.7v3.6h-2s.03-6.3 0-7h2v1c.3-.5.9-1.2 2.1-1.2 1.5 0 2.6 1 2.6 3.1v4.1Z"/></svg></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Shop</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#collections">All Designs</a></li>
+          <li><a href="#weddings">Weddings &amp; Events</a></li>
+          <li><a href="#sympathy">Sympathy &amp; Funeral</a></li>
+          <li><a href="#contact">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Studio</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#contact">Careers</a></li>
+          <li><a href="#contact">Wholesale</a></li>
+          <li><a href="#contact">Press</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6>Studio Hours</h6>
+        <ul class="list-unstyled small" style="color:rgba(246,241,231,0.6);">
+          <li class="mb-1 d-flex justify-content-between" style="max-width:260px;"><span>Mon – Fri</span><span>9:00 – 18:00</span></li>
+          <li class="mb-1 d-flex justify-content-between" style="max-width:260px;"><span>Saturday</span><span>9:00 – 16:00</span></li>
+          <li class="mb-1 d-flex justify-content-between" style="max-width:260px;"><span>Sunday</span><span>Closed</span></li>
+        </ul>
+      </div>
+    </div>
+    <hr style="border-color:rgba(246,241,231,0.15); margin:2.6rem 0 1.4rem;">
+    <div class="d-flex flex-column flex-md-row justify-content-between small" style="color:rgba(246,241,231,0.45);">
+      <div>© 2026 S2 Bloom &amp; Flowerista. All rights reserved.</div>
+      <div>Design demo — static, non-transactional site.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el=> io.observe(el));
+
+  document.querySelectorAll('.pill-filter').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.pill-filter').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
